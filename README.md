@@ -8,6 +8,8 @@ This project provides a **clean, user-friendly interface** for learning through 
 
 ---
 
+https://sumanx16.github.io/Suman_Academy/
+
 ## ✨ Key Features
 
 ### 📚 Multi-Course Platform
