@@ -8,7 +8,7 @@ This project provides a **clean, user-friendly interface** for learning through 
 
 ---
 
-https://sumanx16.github.io/Suman_Academy/
+**[Live Demo](https://sumanx16.github.io/Suman_Academy/)** &nbsp; *(<- Click Here)*
 
 ## ✨ Key Features
 
