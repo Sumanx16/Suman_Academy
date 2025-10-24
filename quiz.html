@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Center - Test Your Skills | Suman Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="Test your skills with interactive quizzes. Track progress, earn achievements, and reinforce learning through gamified assessments across Excel, SQL, and GitHub courses." />
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .text-gradient-primary {
+            background: linear-gradient(to right, #4F46E5, #EC4899); /* Indigo to Pink */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+             background-clip: text;
+            text-fill-color: transparent;
+        }
+        .transition-smooth { transition: all 0.3s ease-in-out; }
+        .shadow-interactive { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07); }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07);
+        }
+        .btn-primary { /* Indigo */
+            display: inline-block; background-color: #4F46E5; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.3s; text-align: center;
+        }
+        .btn-primary:hover { background-color: #4338CA; }
+        .btn-secondary { /* Green */
+             display: inline-block; background-color: #10B981; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.3s; text-align: center;
+        }
+        .btn-secondary:hover { background-color: #059669; }
+        .btn-accent { /* Purple */
+            display: inline-block; background-color: #9333EA; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.3s; text-align: center;
+        }
+        .btn-accent:hover { background-color: #7E22CE; }
+        .btn-outline {
+             display: inline-block; background-color: white; color: #4F46E5; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: 1px solid #E5E7EB; transition: all 0.3s; text-align: center;
+        }
+        .btn-outline:hover { background-color: #F9FAFB; border-color: #D1D5DB; }
+
+        /* Quiz Specific Styles */
+        .quiz-option.selected-correct { border-color: #10B981; background-color: #ECFDF5; }
+        .quiz-option.selected-incorrect { border-color: #EF4444; background-color: #FEF2F2; }
+        .quiz-option.selected-correct .quiz-indicator, .quiz-option.selected-incorrect .quiz-indicator { border-width: 6px; }
+        .quiz-option.selected-correct .quiz-indicator { border-color: #10B981; }
+        .quiz-option.selected-incorrect .quiz-indicator { border-color: #EF4444; }
+        .quiz-option:not(.disabled):hover .quiz-indicator { border-color: #A5B4FC; } /* Indigo-200 on hover */
+        .quiz-option.disabled { cursor: not-allowed; opacity: 0.7; }
+
+        /* Add basic animation styles */
+        .fade-in-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+     <!-- Navigation Header -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-indigo-600" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/><path d="M12 14l2 2 6-6" stroke="white" stroke-width="2" fill="none"/></svg>
+                    <h1 class="text-xl font-bold text-indigo-600">Suman Academy</h1>
+                </a>
+                <div class="hidden md:flex items-baseline space-x-4">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">Home</a>
+                    <a href="excel.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">Excel Course</a>
+                    <a href="sql.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">SQL Course</a>
+                    <a href="github.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">GitHub Course</a>
+                    <a href="quiz.html" class="text-indigo-600 font-semibold px-3 py-2 rounded-md text-sm">Quiz Center</a>
+                    <a href="about.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">About</a>
+                </div>
+                 <div class="md:hidden">
+                    <button type="button" class="text-gray-600 hover:text-indigo-600 p-2 rounded-md" id="mobile-menu-button" aria-label="Toggle menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+                 <a href="index.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">Home</a>
+                <a href="excel.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">Excel Course</a>
+                <a href="sql.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">SQL Course</a>
+                <a href="github.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">GitHub Course</a>
+                <a href="quiz.html" class="text-indigo-600 font-semibold block px-3 py-2 rounded-md text-base">Quiz Center</a>
+                <a href="about.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">About</a>
+            </div>
+        </div>
+    </nav>
+
+     <!-- Hero Section -->
+    <header class="bg-gray-50">
+        <div class="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                    <span class="block">Interactive</span>
+                    <span class="block text-gradient-primary">Quiz Center</span>
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Test your knowledge, track your progress, and reinforce learning through gamified assessments across all our courses.
+                </p>
+                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                     <button onclick="startQuickQuiz()" class="btn-primary w-full sm:w-auto">Start Quick Assessment</button>
+                     <button onclick="viewProgress()" class="btn-outline w-full sm:w-auto">View My Progress</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+     <!-- Course Quiz Categories -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900">Choose Your Challenge</h2>
+                <p class="mt-4 text-lg text-gray-500">Select from our quiz library organized by course.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Excel Quizzes -->
+                <div class="card group fade-in-up">
+                    <img class="h-48 w-full object-cover rounded-lg mb-6" src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Excel quiz interface" onerror="this.src='https://placehold.co/800x600/e2e8f0/64748b?text=Excel+Quiz'; this.onerror=null;">
+                    <h3 class="text-xl font-semibold text-gray-900">Excel Mastery Quizzes</h3>
+                    <p class="mt-2 text-gray-500 text-sm">Test your skills from basic formulas to advanced pivot tables.</p>
+                    <div class="mt-4 flex items-center justify-between">
+                         <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">12 Quizzes</span>
+                         <span class="text-sm font-semibold text-green-600">Your Best: 87%</span>
+                    </div>
+                    <button onclick="startExcelQuiz()" class="btn-secondary w-full text-center block mt-6">Start Excel Quiz</button>
+                </div>
+                <!-- SQL Quizzes -->
+                <div class="card group fade-in-up" style="transition-delay: 0.2s;">
+                    <img class="h-48 w-full object-cover rounded-lg mb-6" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="SQL database interface" onerror="this.src='https://placehold.co/800x600/e0e7ff/4338ca?text=SQL+Quiz'; this.onerror=null;">
+                    <h3 class="text-xl font-semibold text-gray-900">SQL Database Quizzes</h3>
+                    <p class="mt-2 text-gray-500 text-sm">Challenge your knowledge with queries, joins, and database concepts.</p>
+                    <div class="mt-4 flex items-center justify-between">
+                         <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">15 Quizzes</span>
+                         <span class="text-sm font-semibold text-indigo-600">Your Best: 92%</span>
+                    </div>
+                    <button onclick="startSQLQuiz()" class="btn-primary w-full text-center block mt-6">Start SQL Quiz</button>
+                </div>
+                <!-- GitHub Quizzes -->
+                <div class="card group fade-in-up" style="transition-delay: 0.4s;">
+                     <img class="h-48 w-full object-cover rounded-lg mb-6" src="https://images.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.jpg" alt="GitHub interface" onerror="this.src='https://placehold.co/800x600/f3e8ff/7e22ce?text=GitHub+Quiz'; this.onerror=null;">
+                    <h3 class="text-xl font-semibold text-gray-900">GitHub Collaboration Quizzes</h3>
+                    <p class="mt-2 text-gray-500 text-sm">Master version control, branching, and team workflows.</p>
+                    <div class="mt-4 flex items-center justify-between">
+                         <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">10 Quizzes</span>
+                         <span class="text-sm font-semibold text-purple-600">Your Best: 76%</span>
+                    </div>
+                    <button onclick="startGitHubQuiz()" class="btn-accent w-full text-center block mt-6">Start GitHub Quiz</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Interactive Quiz Demo -->
+    <section class="py-20 bg-gray-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900">Experience Our Quiz System</h2>
+                <p class="mt-4 text-lg text-gray-500">Try a sample question to see how it works.</p>
+            </div>
+
+            <!-- Quiz Interface Demo -->
+            <div class="card fade-in-up">
+                 <!-- Quiz Header -->
+                 <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-3">
+                         <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                         </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Excel Fundamentals Quiz</h3>
+                            <p class="text-sm text-gray-500">Question 3 of 10</p>
+                        </div>
+                    </div>
+                     <div class="text-right">
+                        <div class="text-sm text-gray-500">Score: <span class="font-semibold text-indigo-600">180 pts</span></div>
+                        <div class="text-sm text-gray-500">Time: <span class="font-semibold text-purple-600" id="quiz-timer">0:45</span></div>
+                     </div>
+                </div>
+
+                 <!-- Progress Bar -->
+                 <div class="mb-6">
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-indigo-500 to-green-500 h-2 rounded-full transition-all duration-500 ease-out" style="width: 30%"></div>
+                    </div>
+                 </div>
+
+                 <!-- Question -->
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-6">
+                        Which Excel function finds the highest value in a range?
+                    </h4>
+                    <!-- Answer Options -->
+                    <div class="space-y-3" id="quiz-options">
+                        <button class="quiz-option w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed" onclick="selectAnswer(this, false)">
+                            <div class="flex items-center space-x-3">
+                                <div class="quiz-indicator w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all duration-200"></div>
+                                <span>A) SUM()</span>
+                            </div>
+                        </button>
+                        <button class="quiz-option w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed" onclick="selectAnswer(this, false)">
+                           <div class="flex items-center space-x-3">
+                                <div class="quiz-indicator w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all duration-200"></div>
+                                <span>B) AVERAGE()</span>
+                            </div>
+                        </button>
+                         <button class="quiz-option w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed" onclick="selectAnswer(this, true)">
+                            <div class="flex items-center space-x-3">
+                                <div class="quiz-indicator w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all duration-200"></div>
+                                <span>C) MAX()</span>
+                            </div>
+                        </button>
+                         <button class="quiz-option w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed" onclick="selectAnswer(this, false)">
+                            <div class="flex items-center space-x-3">
+                                <div class="quiz-indicator w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all duration-200"></div>
+                                <span>D) COUNT()</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Feedback Panel (Hidden initially) -->
+                 <div id="feedback-panel" class="hidden mt-6 rounded-lg p-4">
+                     <!-- Content injected by JS -->
+                 </div>
+
+                 <!-- Quiz Actions -->
+                <div class="flex flex-col sm:flex-row justify-between items-center mt-6 space-y-3 sm:space-y-0">
+                    <button class="text-sm text-gray-500 hover:text-indigo-600 transition-colors duration-200">
+                        <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Need a hint?
+                    </button>
+                    <button id="submit-answer" class="btn-primary w-full sm:w-auto opacity-50 cursor-not-allowed" disabled>
+                        Submit Answer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+     <footer class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="font-semibold mb-4">Courses</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="excel.html" class="hover:text-white transition-colors">Excel Mastery</a></li>
+                        <li><a href="sql.html" class="hover:text-white transition-colors">SQL Database</a></li>
+                        <li><a href="github.html" class="hover:text-white transition-colors">GitHub Collaboration</a></li>
+                        <li><a href="quiz.html" class="hover:text-white transition-colors">Quiz Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="index.html#success-stories" class="hover:text-white transition-colors">Success Stories</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                 <div class="flex items-start flex-col">
+                    <div class="flex items-center space-x-2">
+                        <svg class="h-8 w-8 text-white" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/><path d="M12 14l2 2 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                        <span class="text-xl font-bold">Suman Academy</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-2">Empowering professionals with practical skills.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Suman Academy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Quiz Timer ---
+            let quizTimer = 45;
+            let timerInterval;
+            const timerElement = document.getElementById('quiz-timer');
+
+            function startQuizTimer() {
+                clearInterval(timerInterval); // Clear any existing interval
+                quizTimer = 45; // Reset timer
+                timerElement.textContent = `0:${quizTimer}`;
+                timerInterval = setInterval(() => {
+                    quizTimer--;
+                    const minutes = Math.floor(quizTimer / 60);
+                    const seconds = quizTimer % 60;
+                    if(timerElement) {
+                        timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                    }
+                    if (quizTimer <= 0) {
+                        clearInterval(timerInterval);
+                        // Optionally disable options or auto-submit
+                        disableQuizOptions();
+                         if(timerElement) timerElement.textContent = "Time's up!";
+                    }
+                }, 1000);
+            }
+
+             // --- Quiz Interaction ---
+             const quizOptionsContainer = document.getElementById('quiz-options');
+             const submitBtn = document.getElementById('submit-answer');
+             const feedbackPanel = document.getElementById('feedback-panel');
+             let selectedAnswerIsCorrect = null;
+             let answerSubmitted = false;
+
+             window.selectAnswer = function(button, isCorrect) {
+                 if (answerSubmitted) return; // Don't allow changing answer after submission
+
+                 // Remove previous selection styles
+                 quizOptionsContainer.querySelectorAll('.quiz-option').forEach(option => {
+                     option.classList.remove('selected-correct', 'selected-incorrect', 'border-green-500', 'bg-green-50', 'border-red-500', 'bg-red-50', 'border-indigo-300', 'bg-indigo-50');
+                     option.classList.add('border-gray-200');
+                     const indicator = option.querySelector('.quiz-indicator');
+                     if(indicator) indicator.style.borderColor = '#D1D5DB'; // Reset indicator color
+                 });
+
+                 // Apply selected style
+                 button.classList.remove('border-gray-200');
+                 button.classList.add('border-indigo-300', 'bg-indigo-50'); // Highlight selected
+                 const indicator = button.querySelector('.quiz-indicator');
+                 if(indicator) indicator.style.borderColor = '#A5B4FC'; // Highlight indicator
+
+                 selectedAnswerIsCorrect = isCorrect;
+
+                 // Enable submit button
+                 submitBtn.disabled = false;
+                 submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+             }
+
+             function disableQuizOptions() {
+                 quizOptionsContainer.querySelectorAll('.quiz-option').forEach(option => {
+                     option.disabled = true;
+                     option.classList.add('disabled');
+                 });
+                  submitBtn.disabled = true;
+                  submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+             }
+
+             submitBtn.addEventListener('click', () => {
+                 if (selectedAnswerIsCorrect === null || answerSubmitted) return;
+
+                 answerSubmitted = true;
+                 clearInterval(timerInterval); // Stop the timer
+                 disableQuizOptions();
+
+                 // Find the selected button again to apply final styles
+                 const selectedButton = Array.from(quizOptionsContainer.querySelectorAll('.quiz-option')).find(btn => btn.classList.contains('border-indigo-300'));
+
+                 if(selectedButton) {
+                     // Remove intermediate selection style
+                      selectedButton.classList.remove('border-indigo-300', 'bg-indigo-50');
+                     const selectedIndicator = selectedButton.querySelector('.quiz-indicator');
+                     if(selectedIndicator) selectedIndicator.style.borderColor = ''; // Clear indicator highlight
+
+
+                    // Apply correct/incorrect style
+                    if (selectedAnswerIsCorrect) {
+                        selectedButton.classList.add('selected-correct');
+                        feedbackPanel.innerHTML = `
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-green-700 mb-1">Correct! Well done!</h4>
+                                    <p class="text-sm text-gray-600">The MAX() function returns the largest value in a set of values. It's essential for finding peak performance metrics.</p>
+                                    <div class="mt-2 text-sm font-semibold text-green-700">+100 Points</div>
+                                </div>
+                            </div>`;
+                        feedbackPanel.className = 'mt-6 rounded-lg p-4 bg-green-50 border border-green-200'; // Added border
+                    } else {
+                        selectedButton.classList.add('selected-incorrect');
+                         feedbackPanel.innerHTML = `
+                             <div class="flex items-start space-x-3">
+                                 <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                     <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                                 </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-red-700 mb-1">Not quite right</h4>
+                                    <p class="text-sm text-gray-600">The correct answer is C) MAX(). This function finds the largest value in a range.</p>
+                                    <div class="mt-2 text-sm font-semibold text-red-700">+0 Points</div>
+                                </div>
+                            </div>`;
+                         feedbackPanel.className = 'mt-6 rounded-lg p-4 bg-red-50 border border-red-200'; // Added border
+                         // Also highlight the actual correct answer
+                         quizOptionsContainer.querySelector('button[onclick*="true"]').classList.add('selected-correct');
+                    }
+                     feedbackPanel.classList.remove('hidden');
+                 }
+
+             });
+
+            // Functions to simulate starting quizzes (replace alert with actual navigation)
+            window.startQuickQuiz = function() { alert('Starting Quick Assessment Quiz!'); }
+            window.viewProgress = function() { alert('Navigating to Progress Dashboard!'); }
+            window.startExcelQuiz = function() { alert('Starting Excel Quiz module!'); }
+            window.startSQLQuiz = function() { alert('Starting SQL Quiz module!'); }
+            window.startGitHubQuiz = function() { alert('Starting GitHub Quiz module!'); }
+            window.startFullQuiz = function() { alert('Starting full Quiz Experience!'); }
+
+
+             // --- Intersection Observer for Animations ---
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.fade-in-up').forEach(el => { observer.observe(el); });
+
+             // Start timer on load for the demo quiz
+            startQuizTimer();
+        });
+    </script>
+</body>
+</html>

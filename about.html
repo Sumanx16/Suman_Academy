@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Suman Academy - Learning Through Doing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="Discover Suman Academy's mission to democratize quality education through practical learning. Meet our expert instructors and learn about our proven methodology." />
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .text-gradient-primary {
+            background: linear-gradient(to right, #4F46E5, #9333EA); /* Indigo to Purple */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+             background-clip: text;
+            text-fill-color: transparent;
+        }
+        .transition-smooth { transition: all 0.3s ease-in-out; }
+        .shadow-interactive { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07); }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07);
+        }
+        .btn-primary { /* Indigo */
+            display: inline-block; background-color: #4F46E5; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.3s; text-align: center;
+        }
+        .btn-primary:hover { background-color: #4338CA; }
+        .btn-secondary { /* Green */
+             display: inline-block; background-color: #10B981; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.3s; text-align: center;
+        }
+        .btn-secondary:hover { background-color: #059669; }
+         .btn-outline {
+             display: inline-block; background-color: white; color: #4F46E5; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: 1px solid #E5E7EB; transition: all 0.3s; text-align: center;
+        }
+        .btn-outline:hover { background-color: #F9FAFB; border-color: #D1D5DB; }
+
+        /* Add basic animation styles */
+        .fade-in-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+     <!-- Navigation Header -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-indigo-600" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/><path d="M12 14l2 2 6-6" stroke="white" stroke-width="2" fill="none"/></svg>
+                    <h1 class="text-xl font-bold text-indigo-600">Suman Academy</h1>
+                </a>
+                <div class="hidden md:flex items-baseline space-x-4">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">Home</a>
+                    <a href="excel.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">Excel Course</a>
+                    <a href="sql.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">SQL Course</a>
+                    <a href="github.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">GitHub Course</a>
+                    <a href="quiz.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">Quiz Center</a>
+                    <a href="about.html" class="text-indigo-600 font-semibold px-3 py-2 rounded-md text-sm">About</a>
+                </div>
+                 <div class="md:hidden">
+                    <button type="button" class="text-gray-600 hover:text-indigo-600 p-2 rounded-md" id="mobile-menu-button" aria-label="Toggle menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+                 <a href="index.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">Home</a>
+                <a href="excel.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">Excel Course</a>
+                <a href="sql.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">SQL Course</a>
+                <a href="github.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">GitHub Course</a>
+                <a href="quiz.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">Quiz Center</a>
+                <a href="about.html" class="text-indigo-600 font-semibold block px-3 py-2 rounded-md text-base">About</a>
+            </div>
+        </div>
+    </nav>
+
+     <!-- Hero Section -->
+    <header class="bg-gray-50">
+        <div class="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                    <span class="block">About</span>
+                    <span class="block text-gradient-primary">Suman Academy</span>
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                    Democratizing quality education through our "Learning Through Doing" philosophy.
+                </p>
+                 <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html" class="btn-primary w-full sm:w-auto">Start Your Journey</a>
+                    <a href="quiz.html" class="btn-outline w-full sm:w-auto">Take Skills Assessment</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+     <!-- Mission & Vision Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
+                 <div class="fade-in-up">
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Mission</h2>
+                    <p class="mt-4 text-lg text-gray-500">
+                        To bridge the gap between academic knowledge and professional application, making quality tech education accessible and practical for everyone, everywhere. We believe in learning by doing.
+                    </p>
+                    <p class="mt-4 text-lg text-gray-500">
+                        We provide hands-on, project-based courses focused on the most in-demand skills like Excel, SQL, and GitHub, ensuring our students are job-ready and confident.
+                    </p>
+                    <!-- Key Stats -->
+                    <div class="mt-8 grid grid-cols-2 gap-6">
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg">
+                            <div class="text-3xl font-bold text-indigo-600">15,000+</div>
+                            <div class="text-sm text-gray-500 mt-1">Students Enrolled</div>
+                        </div>
+                        <div class="text-center p-4 bg-green-50 rounded-lg">
+                            <div class="text-3xl font-bold text-green-600">89%</div>
+                            <div class="text-sm text-gray-500 mt-1">Completion Rate</div>
+                        </div>
+                         <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <div class="text-3xl font-bold text-purple-600">$18K+</div>
+                            <div class="text-sm text-gray-500 mt-1">Avg Salary Increase</div>
+                        </div>
+                        <div class="text-center p-4 bg-gray-100 rounded-lg">
+                             <div class="text-3xl font-bold text-gray-700">500+</div>
+                            <div class="text-sm text-gray-500 mt-1">Partner Companies</div>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="mt-12 lg:mt-0 fade-in-up" style="transition-delay: 0.2s;">
+                    <img class="w-full rounded-lg shadow-xl" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="Diverse group of students learning" onerror="this.src='https://placehold.co/1200x800/e0e7ff/4338ca?text=Learning+Community'; this.onerror=null;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+             <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900">Our Core Values</h2>
+                <p class="mt-4 text-lg text-gray-500">Guiding principles behind our teaching and community.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card text-center fade-in-up">
+                     <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                     </div>
+                    <h3 class="text-xl font-semibold">Accessibility</h3>
+                    <p class="mt-2 text-gray-500 text-sm">Making quality education available to everyone, regardless of background or budget.</p>
+                </div>
+                <div class="card text-center fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                       <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold">Progression</h3>
+                    <p class="mt-2 text-gray-500 text-sm">Celebrating small wins and building structured paths towards significant career advancement.</p>
+                </div>
+                <div class="card text-center fade-in-up" style="transition-delay: 0.4s;">
+                     <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold">Mastery</h3>
+                    <p class="mt-2 text-gray-500 text-sm">Ensuring skills are mastered through hands-on practice and real-world application, not just memorization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Final CTA -->
+     <section class="bg-indigo-700">
+         <div class="max-w-4xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Ready to Start Your Learning Journey?</h2>
+            <p class="mt-4 text-lg leading-6 text-indigo-200">Join our community and gain the skills that matter.</p>
+            <a href="index.html" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 sm:w-auto">
+                Explore Courses
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="font-semibold mb-4">Courses</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="excel.html" class="hover:text-white transition-colors">Excel Mastery</a></li>
+                        <li><a href="sql.html" class="hover:text-white transition-colors">SQL Database</a></li>
+                        <li><a href="github.html" class="hover:text-white transition-colors">GitHub Collaboration</a></li>
+                        <li><a href="quiz.html" class="hover:text-white transition-colors">Quiz Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="index.html#success-stories" class="hover:text-white transition-colors">Success Stories</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                 <div class="flex items-start flex-col">
+                    <div class="flex items-center space-x-2">
+                        <svg class="h-8 w-8 text-white" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/><path d="M12 14l2 2 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                        <span class="text-xl font-bold">Suman Academy</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-2">Empowering professionals with practical skills.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Suman Academy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+             // --- Intersection Observer for Animations ---
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Optional: Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.fade-in-up').forEach(el => { observer.observe(el); });
+        });
+    </script>
+</body>
+</html>
+s

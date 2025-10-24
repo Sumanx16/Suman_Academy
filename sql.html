@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL Database Mastery - 7-Day Journey | Suman Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"> <!-- Font for code blocks -->
+    <meta name="description" content="Master SQL database skills in 7 days with visual learning aids, interactive query builder, and real-world datasets. Join 1,876+ students who've advanced their data careers." />
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .font-fira-code { font-family: 'Fira Code', monospace; }
+        .text-gradient-primary {
+            background: linear-gradient(to right, #4F46E5, #3B82F6); /* Indigo to Blue */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .transition-smooth { transition: all 0.3s ease-in-out; }
+        .shadow-interactive { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07); }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07);
+        }
+        .btn-primary { /* Indigo for SQL */
+            display: inline-block;
+            background-color: #4F46E5;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .btn-primary:hover { background-color: #4338CA; }
+        .btn-secondary { /* Outline */
+             display: inline-block;
+            background-color: white;
+            color: #4F46E5;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            border: 1px solid #E5E7EB;
+            transition: all 0.3s;
+             text-align: center;
+        }
+        .btn-secondary:hover { background-color: #F9FAFB; border-color: #D1D5DB; }
+         .form-input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+         .modal {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        /* Add basic animation styles */
+        .fade-in-up {
+             opacity: 0;
+             transform: translateY(20px);
+             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-indigo-600" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/><path d="M12 14l2 2 6-6" stroke="white" stroke-width="2" fill="none"/></svg>
+                    <h1 class="text-xl font-bold text-indigo-600">Suman Academy</h1>
+                </a>
+                <div class="hidden md:flex items-baseline space-x-4">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">Home</a>
+                    <a href="excel.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">Excel Course</a>
+                    <a href="sql.html" class="text-indigo-600 font-semibold px-3 py-2 rounded-md text-sm">SQL Course</a>
+                    <a href="github.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">GitHub Course</a>
+                    <a href="quiz.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">Quiz Center</a>
+                    <a href="about.html" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm transition-smooth">About</a>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="text-gray-600 hover:text-indigo-600 p-2 rounded-md" id="mobile-menu-button" aria-label="Toggle menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+                <a href="index.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">Home</a>
+                <a href="excel.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">Excel Course</a>
+                <a href="sql.html" class="text-indigo-600 font-semibold block px-3 py-2 rounded-md text-base">SQL Course</a>
+                <a href="github.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">GitHub Course</a>
+                <a href="quiz.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">Quiz Center</a>
+                <a href="about.html" class="text-gray-600 hover:text-indigo-600 block px-3 py-2 rounded-md text-base transition-smooth">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gray-50">
+        <div class="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
+             <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
+                <div class="text-center lg:text-left">
+                     <div class="inline-block bg-indigo-100 text-indigo-800 px-4 py-1 rounded-full text-sm font-semibold mb-4 flex items-center justify-center lg:justify-start w-fit mx-auto lg:mx-0">
+                          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M12,3C7.58,3 4,4.79 4,7C4,9.21 7.58,11 12,11C16.42,11 20,9.21 20,7C20,4.79 16.42,3 12,3M4,9V12C4,14.21 7.58,16 12,16C16.42,16 20,14.21 20,12V9C20,11.21 16.42,13 12,13C7.58,13 4,11.21 4,9M4,14V17C4,19.21 7.58,21 12,21C16.42,21 20,19.21 20,17V14C20,16.21 16.42,18 12,18C7.58,18 4,16.21 4,14Z"/></svg>
+                         Database Mastery Course
+                     </div>
+                     <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                        <span class="block">Master SQL in</span>
+                        <span class="block text-gradient-primary">7 Days</span>
+                    </h1>
+                    <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500 lg:mx-0">
+                         Transform raw data into actionable insights with visual learning aids, interactive query builder, and real-world datasets from top industries.
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <button class="btn-primary w-full sm:w-auto" onclick="startFreeTrial()">Start 7-Day Journey Free</button>
+                        <button class="btn-secondary w-full sm:w-auto" onclick="openQueryBuilder()">Try Query Builder</button>
+                    </div>
+                     <div class="mt-6 flex flex-col sm:flex-row justify-center lg:justify-start space-y-2 sm:space-y-0 sm:space-x-6">
+                        <div class="flex items-center justify-center lg:justify-start text-sm text-gray-500">
+                           <svg class="w-5 h-5 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                           1,876+ students enrolled
+                        </div>
+                        <div class="flex items-center justify-center lg:justify-start text-sm text-gray-500">
+                           <svg class="w-5 h-5 text-yellow-400 fill-current mr-1" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                           4.9/5 rating
+                        </div>
+                     </div>
+                </div>
+                 <div class="mt-12 lg:mt-0">
+                    <!-- Interactive SQL Query Builder Demo -->
+                     <div class="card fade-in-up">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Interactive Query Builder</h3>
+                         <!-- Query Builder Interface -->
+                         <div class="bg-gray-900 rounded-lg p-4 mb-4 font-fira-code text-sm">
+                            <div class="text-green-400 mb-2">-- Interactive SQL Query</div>
+                            <div class="text-white">
+                                <span class="text-blue-400">SELECT</span> <span class="text-yellow-300">customer_name</span>, <span class="text-yellow-300">total_orders</span>, <span class="text-yellow-300">revenue</span><br/>
+                                <span class="text-blue-400">FROM</span> <span class="text-purple-300">customers</span><br/>
+                                <span class="text-blue-400">JOIN</span> <span class="text-purple-300">orders</span> <span class="text-blue-400">ON</span> <span class="text-yellow-300">customers.id = orders.customer_id</span><br/>
+                                <span class="text-blue-400">WHERE</span> <span class="text-yellow-300">revenue > 1000</span><br/>
+                                <span class="text-blue-400">ORDER BY</span> <span class="text-yellow-300">revenue DESC</span>
+                            </div>
+                         </div>
+                         <!-- Results Preview -->
+                         <div class="bg-indigo-50 rounded-lg p-4">
+                            <div class="text-xs text-gray-600 mb-2">Query Results (3 rows)</div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-indigo-100">
+                                        <tr>
+                                            <th class="px-3 py-2 text-left text-indigo-800 font-semibold">Customer Name</th>
+                                            <th class="px-3 py-2 text-left text-indigo-800 font-semibold">Total Orders</th>
+                                            <th class="px-3 py-2 text-left text-indigo-800 font-semibold">Revenue</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-700">
+                                        <tr class="border-b border-indigo-200"><td class="px-3 py-2">Sarah Johnson</td><td class="px-3 py-2">24</td><td class="px-3 py-2 font-semibold text-green-600">$3,450</td></tr>
+                                        <tr class="border-b border-indigo-200"><td class="px-3 py-2">Michael Chen</td><td class="px-3 py-2">18</td><td class="px-3 py-2 font-semibold text-green-600">$2,890</td></tr>
+                                        <tr><td class="px-3 py-2">Emma Rodriguez</td><td class="px-3 py-2">15</td><td class="px-3 py-2 font-semibold text-green-600">$1,750</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                         </div>
+                         <button class="mt-4 text-indigo-600 hover:text-indigo-800 text-sm font-semibold transition-colors" onclick="openQueryBuilder()">Try Full Builder →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+     <!-- Course Overview with Visual Learning Path -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900">Your 7-Day SQL Mastery Journey</h2>
+                <p class="mt-4 text-lg text-gray-500">From basic queries to complex database design and optimization.</p>
+            </div>
+            <div class="space-y-12">
+                 <!-- Day 1-2 -->
+                 <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center fade-in-up">
+                    <div class="mb-8 lg:mb-0">
+                        <div class="card">
+                            <span class="text-sm font-semibold bg-indigo-100 text-indigo-800 py-1 px-3 rounded-full inline-block">Days 1-2</span>
+                            <h3 class="mt-2 text-xl font-semibold text-gray-900">Foundation Queries</h3>
+                            <p class="mt-2 text-gray-500">Master SELECT, WHERE, ORDER BY with visual breakdowns and real e-commerce datasets.</p>
+                             <ul class="mt-3 list-disc list-inside text-sm text-gray-500 space-y-1">
+                                <li>Retrieve specific columns</li>
+                                <li>Filter data using conditions</li>
+                                <li>Sort results effectively</li>
+                                <li>Work with basic operators</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <img class="w-full h-64 object-cover rounded-lg shadow-lg" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Database schema visualization" onerror="this.src='https://placehold.co/800x512/e0e7ff/4338ca?text=Visual+Schema'; this.onerror=null;">
+                    </div>
+                 </div>
+                 <!-- Day 3-4 -->
+                 <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center fade-in-up">
+                     <div class="lg:order-last mb-8 lg:mb-0">
+                         <div class="card">
+                             <span class="text-sm font-semibold bg-indigo-100 text-indigo-800 py-1 px-3 rounded-full inline-block">Days 3-4</span>
+                            <h3 class="mt-2 text-xl font-semibold text-gray-900">Advanced Joins</h3>
+                            <p class="mt-2 text-gray-500">Connect multiple tables using INNER, LEFT, RIGHT, and FULL OUTER JOINs with visual diagrams.</p>
+                             <ul class="mt-3 list-disc list-inside text-sm text-gray-500 space-y-1">
+                                <li>Combine data from multiple tables</li>
+                                <li>Understand different JOIN types</li>
+                                <li>Handle NULL values in joins</li>
+                                <li>Practice with healthcare & finance data</li>
+                            </ul>
+                        </div>
+                    </div>
+                     <div>
+                        <img class="w-full h-64 object-cover rounded-lg shadow-lg" src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Visual representation of SQL JOINs" onerror="this.src='https://placehold.co/800x512/e0e7ff/4338ca?text=JOIN+Diagrams'; this.onerror=null;">
+                    </div>
+                 </div>
+                 <!-- Day 5-6 -->
+                  <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center fade-in-up">
+                    <div class="mb-8 lg:mb-0">
+                        <div class="card">
+                            <span class="text-sm font-semibold bg-indigo-100 text-indigo-800 py-1 px-3 rounded-full inline-block">Days 5-6</span>
+                            <h3 class="mt-2 text-xl font-semibold text-gray-900">Database Design</h3>
+                            <p class="mt-2 text-gray-500">Design efficient databases, learn normalization, and indexing strategies with visual schema builders.</p>
+                            <ul class="mt-3 list-disc list-inside text-sm text-gray-500 space-y-1">
+                                <li>Understand normalization (1NF, 2NF, 3NF)</li>
+                                <li>Design table relationships</li>
+                                <li>Implement primary and foreign keys</li>
+                                <li>Learn about indexing</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <img class="w-full h-64 object-cover rounded-lg shadow-lg" src="https://images.pixabay.com/photo/2020/02/18/11/03/analytics-4859360_1280.jpg" alt="Database design diagram" onerror="this.src='https://placehold.co/800x512/e0e7ff/4338ca?text=Database+Design'; this.onerror=null;">
+                    </div>
+                 </div>
+                 <!-- Day 7 -->
+                  <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center fade-in-up">
+                     <div class="lg:order-last mb-8 lg:mb-0">
+                         <div class="card">
+                             <span class="text-sm font-semibold bg-indigo-100 text-indigo-800 py-1 px-3 rounded-full inline-block">Day 7</span>
+                            <h3 class="mt-2 text-xl font-semibold text-gray-900">Performance Mastery</h3>
+                            <p class="mt-2 text-gray-500">Optimize queries for speed using execution plans and identify bottlenecks with visual tools.</p>
+                            <ul class="mt-3 list-disc list-inside text-sm text-gray-500 space-y-1">
+                                <li>Understand query execution plans</li>
+                                <li>Optimize queries with indexes</li>
+                                <li>Learn about common performance pitfalls</li>
+                                <li>Final Project & Certification</li>
+                            </ul>
+                        </div>
+                    </div>
+                     <div>
+                        <img class="w-full h-64 object-cover rounded-lg shadow-lg" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Performance monitoring dashboard" onerror="this.src='https://placehold.co/800x512/e0e7ff/4338ca?text=Performance+Dashboard'; this.onerror=null;">
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="bg-indigo-700">
+         <div class="max-w-4xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Ready to Master SQL?</h2>
+            <p class="mt-4 text-lg leading-6 text-indigo-200">Unlock the power of data. Start your free 7-day trial now.</p>
+            <a href="#" onclick="startFreeTrial()" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 sm:w-auto">
+                Enroll for Free
+            </a>
+        </div>
+    </section>
+
+     <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="font-semibold mb-4">Courses</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="excel.html" class="hover:text-white transition-colors">Excel Mastery</a></li>
+                        <li><a href="sql.html" class="hover:text-white transition-colors">SQL Database</a></li>
+                        <li><a href="github.html" class="hover:text-white transition-colors">GitHub Collaboration</a></li>
+                        <li><a href="quiz.html" class="hover:text-white transition-colors">Quiz Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="index.html#success-stories" class="hover:text-white transition-colors">Success Stories</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                 <div class="flex items-start flex-col">
+                    <div class="flex items-center space-x-2">
+                        <svg class="h-8 w-8 text-white" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/><path d="M12 14l2 2 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                        <span class="text-xl font-bold">Suman Academy</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-2">Empowering professionals with practical skills.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Suman Academy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+     <!-- Query Builder Modal -->
+    <div id="queryBuilderModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-[60] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <div class="modal max-w-4xl w-full max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+             <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-gray-900">Interactive SQL Query Builder</h3>
+                <button onclick="closeQueryBuilder()" class="text-gray-500 hover:text-gray-800" aria-label="Close modal">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+             <div class="grid lg:grid-cols-2 gap-6">
+                 <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Build Your Query</label>
+                    <div class="bg-gray-900 rounded-lg p-4 font-fira-code text-sm text-white min-h-[150px] mb-4 overflow-x-auto" id="queryDisplay">
+                         <span class="text-blue-400">SELECT</span> *<br/><span class="text-blue-400">FROM</span> <span class="text-purple-300">customers</span><br/><span class="text-blue-400">WHERE</span> <span class="text-yellow-300">city = 'New York'</span>
+                    </div>
+                    <div class="space-y-3">
+                         <div>
+                            <label for="selectColumns" class="block text-xs font-medium text-gray-500 mb-1">Select Columns</label>
+                            <select id="selectColumns" class="form-input text-sm" onchange="updateQuery()">
+                                <option value="*">* (All Columns)</option>
+                                <option value="customer_name, email">customer_name, email</option>
+                                <option value="customer_name, city, total_orders">customer_name, city, total_orders</option>
+                            </select>
+                         </div>
+                         <div>
+                            <label for="fromTable" class="block text-xs font-medium text-gray-500 mb-1">From Table</label>
+                            <select id="fromTable" class="form-input text-sm" onchange="updateQuery()">
+                                <option value="customers">customers</option>
+                                <option value="orders">orders</option>
+                                <option value="products">products</option>
+                            </select>
+                         </div>
+                         <div>
+                            <label for="whereCondition" class="block text-xs font-medium text-gray-500 mb-1">Where Condition (e.g., city = 'New York')</label>
+                            <input type="text" id="whereCondition" class="form-input text-sm" placeholder="Leave blank for no filter" value="city = 'New York'" oninput="updateQuery()" />
+                         </div>
+                    </div>
+                 </div>
+                 <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Query Results</label>
+                     <div class="bg-indigo-50 rounded-lg p-4 min-h-[250px] flex flex-col">
+                        <div class="text-xs text-gray-600 mb-3" id="queryStatus">Executing query...</div>
+                        <div class="overflow-auto flex-grow" id="resultsTableContainer">
+                            <!-- Results table will be injected here -->
+                            <p class="text-sm text-gray-500">No results yet. Run query.</p>
+                        </div>
+                         <div class="mt-4 flex items-center justify-between text-sm">
+                            <span class="text-gray-500" id="queryExecutionTime"></span>
+                            <button class="btn-primary text-sm py-2 px-4" onclick="runQuery()">Run Query</button>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Query Builder Modal ---
+            const queryBuilderModal = document.getElementById('queryBuilderModal');
+            const queryDisplay = document.getElementById('queryDisplay');
+            const selectColumns = document.getElementById('selectColumns');
+            const fromTable = document.getElementById('fromTable');
+            const whereCondition = document.getElementById('whereCondition');
+            const resultsTableContainer = document.getElementById('resultsTableContainer');
+            const queryStatus = document.getElementById('queryStatus');
+            const queryExecutionTime = document.getElementById('queryExecutionTime');
+
+            window.openQueryBuilder = function() {
+                queryBuilderModal.classList.remove('hidden');
+                setTimeout(() => { // Allow display change before starting transition
+                     queryBuilderModal.classList.remove('opacity-0');
+                     queryBuilderModal.querySelector('.modal').classList.remove('scale-95');
+                }, 10);
+                document.body.style.overflow = 'hidden'; // Prevent background scroll
+            }
+
+            window.closeQueryBuilder = function() {
+                 queryBuilderModal.classList.add('opacity-0');
+                 queryBuilderModal.querySelector('.modal').classList.add('scale-95');
+                 setTimeout(() => { // Wait for transition before hiding
+                    queryBuilderModal.classList.add('hidden');
+                 }, 300);
+                document.body.style.overflow = ''; // Restore background scroll
+            }
+
+             // Close modal on escape key
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !queryBuilderModal.classList.contains('hidden')) {
+                    closeQueryBuilder();
+                }
+            });
+             // Close modal on outside click
+             queryBuilderModal.addEventListener('click', (e) => {
+                 if (e.target === queryBuilderModal) {
+                    closeQueryBuilder();
+                 }
+             });
+
+
+            window.updateQuery = function() {
+                const columns = selectColumns.value;
+                const table = fromTable.value;
+                const where = whereCondition.value.trim();
+
+                let queryHTML = `<span class="text-blue-400">SELECT</span> ${columns.includes(',') ? columns.split(',').map(c => `<span class="text-yellow-300">${c.trim()}</span>`).join(', ') : (columns === '*' ? '*' : `<span class="text-yellow-300">${columns}</span>`)}<br/>`;
+                queryHTML += `<span class="text-blue-400">FROM</span> <span class="text-purple-300">${table}</span>`;
+                if (where) {
+                    // Basic attempt to highlight parts of the WHERE clause
+                    const parts = where.match(/(\w+)\s*(=|>|<|>=|<=|!=|LIKE)\s*(.*)/);
+                    if (parts && parts.length === 4) {
+                         queryHTML += `<br/><span class="text-blue-400">WHERE</span> <span class="text-yellow-300">${parts[1]}</span> ${parts[2]} <span class="text-green-300">${parts[3]}</span>`;
+                    } else {
+                         queryHTML += `<br/><span class="text-blue-400">WHERE</span> ${where}`; // Fallback if parsing fails
+                    }
+                }
+
+                queryDisplay.innerHTML = queryHTML;
+            }
+
+            window.runQuery = function() {
+                // --- Simulate Query Execution ---
+                queryStatus.textContent = 'Executing query...';
+                queryExecutionTime.textContent = '';
+                resultsTableContainer.innerHTML = '<p class="text-sm text-gray-500">Loading...</p>';
+
+                 // Sample data based on selected table
+                const sampleData = {
+                    customers: [
+                        { customer_name: 'John Smith', email: 'john@email.com', city: 'New York', total_orders: 5 },
+                        { customer_name: 'Sarah Johnson', email: 'sarah@email.com', city: 'New York', total_orders: 24 },
+                        { customer_name: 'David Lee', email: 'david@email.com', city: 'London', total_orders: 10 },
+                        { customer_name: 'Maria Garcia', email: 'maria@email.com', city: 'Paris', total_orders: 8 },
+                        { customer_name: 'Michael Chen', email: 'michael@email.com', city: 'London', total_orders: 18 }
+                    ],
+                    orders: [
+                         { order_id: 101, customer_id: 1, amount: 150.50, order_date: '2025-10-20'},
+                         { order_id: 102, customer_id: 2, amount: 3450.00, order_date: '2025-10-21'},
+                         { order_id: 103, customer_id: 3, amount: 85.00, order_date: '2025-10-21'},
+                         { order_id: 104, customer_id: 1, amount: 200.00, order_date: '2025-10-22'},
+                         { order_id: 105, customer_id: 5, amount: 2890.00, order_date: '2025-10-23'},
+                    ],
+                    products: [
+                         { product_id: 1, product_name: 'Laptop', price: 1200.00, category: 'Electronics'},
+                         { product_id: 2, product_name: 'Mouse', price: 25.00, category: 'Accessories'},
+                         { product_id: 3, product_name: 'Keyboard', price: 75.00, category: 'Accessories'},
+                    ]
+                };
+
+                const selectedTable = fromTable.value;
+                const data = sampleData[selectedTable] || [];
+                const where = whereCondition.value.trim();
+                let filteredData = data;
+
+                // Basic WHERE filter simulation (only handles simple equality like 'city = New York')
+                 if (where) {
+                    const match = where.match(/(\w+)\s*=\s*'([^']+)'/); // Simple match for column = 'value'
+                    if (match && match.length === 3) {
+                        const key = match[1];
+                        const value = match[2];
+                        filteredData = data.filter(row => row[key] && row[key].toString() === value);
+                    } else {
+                         // Add more complex filter logic here if needed, or show all data if filter is complex
+                         console.warn("Simple filter only handles 'column = \\'value\\''. Showing all data.");
+                         filteredData = data;
+                    }
+                }
+
+
+                setTimeout(() => {
+                    if (filteredData.length > 0) {
+                        const columns = selectColumns.value === '*' ? Object.keys(filteredData[0]) : selectColumns.value.split(',').map(c => c.trim());
+                        let tableHTML = '<table class="w-full text-sm">';
+                        tableHTML += '<thead class="bg-indigo-100"><tr>';
+                        columns.forEach(col => {
+                            tableHTML += `<th class="px-3 py-2 text-left text-indigo-800 font-semibold">${col}</th>`;
+                        });
+                        tableHTML += '</tr></thead>';
+                        tableHTML += '<tbody class="text-gray-700">';
+                        filteredData.forEach(row => {
+                            tableHTML += '<tr class="border-b border-indigo-200">';
+                            columns.forEach(col => {
+                                tableHTML += `<td class="px-3 py-2">${row[col] !== undefined ? row[col] : 'N/A'}</td>`;
+                            });
+                            tableHTML += '</tr>';
+                        });
+                        tableHTML += '</tbody></table>';
+                        resultsTableContainer.innerHTML = tableHTML;
+                        queryStatus.textContent = `Query executed successfully. ${filteredData.length} rows returned.`;
+                    } else {
+                        resultsTableContainer.innerHTML = '<p class="text-sm text-gray-500">No results match your query.</p>';
+                         queryStatus.textContent = `Query executed successfully. 0 rows returned.`;
+                    }
+                    const executionTime = (Math.random() * 0.05 + 0.01).toFixed(3); // Simulate 10-60ms
+                    queryExecutionTime.textContent = `Executed in ${executionTime}s`;
+                }, 500); // Simulate network delay
+            }
+
+
+            // --- Start Free Trial ---
+            window.startFreeTrial = function() {
+                alert('Welcome to SQL Mastery! Your 7-day free trial starts now. (This is a demo)');
+                // In a real app, this would redirect to a signup or login page.
+            }
+
+            // --- Download Resource ---
+             window.downloadResource = function(resourceType) {
+                // In a real app, this would trigger a file download.
+                 alert(`Simulating download for: ${resourceType}. In the full course, you'd get the actual file!`);
+             }
+
+            // --- Intersection Observer for Animations ---
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.fade-in-up').forEach(el => { observer.observe(el); });
+
+            // Initialize query display
+            updateQuery();
+        });
+    </script>
+</body>
+</html>
